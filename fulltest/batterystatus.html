@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<title>Battery Status Full API Test</title>
+	<link rel="stylesheet" href="../css/base.css" type="text/css" media="screen">
+</head>
+
+<body>
+
+<!-- This test page tests each function within battery API according to http://dvcs.w3.org/hg/dap/raw-file/tip/battery/Overview.html -->
+
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!--                    BATTERY                     -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	<div class="container">
+		<table class="table_view">
+			<tr>
+				<td>
+					Battery Status API
+				</td>
+				<td class="col_check">
+			        <p id="battery_check"></p>
+				</td>
+				<td class="col_status">
+					<p id="battery_status"></p>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<script>
+	    var battery = navigator.battery;
+	    var	batteryCheck = document.getElementById("battery_check");
+	    var	batteryStatus = document.getElementById("battery_status");
+	
+	    console.log(battery);
+	
+	    if (battery) {
+	        function setStatus () {
+	            console.log("Set status");
+	            batteryStatus.innerHTML = "PASS";
+	            batteryCheck.innerHTML += "Charging? " + battery.charging + "<br />";
+	            batteryCheck.innerHTML += "Charing time: " + battery.chargingTime + "<br />";
+	            batteryCheck.innerHTML += "Discharge time: " + battery.discharingTime + "<br />";
+	            batteryCheck.innerHTML += "Battery level: " + (battery.level)*100 + "%<br />";
+	        }
+	        // Set initial status
+	        setStatus();
+	        // Set events
+	        battery.addEventListener("levelchange", setStatus, false);
+	        battery.addEventListener("chargingchange", setStatus, false);
+	        battery.addEventListener("chargingtimechange", setStatus, false);
+	        battery.addEventListener("dischargingtimechange", setStatus, false);
+	    }
+	    else {
+	        batteryStatus.innerHTML = "FAIL";
+	        batteryCheck.innerHTML += "Battery API Unavailable" + "<br />";
+	    }
+	</script>
+
+</body>
+</html>

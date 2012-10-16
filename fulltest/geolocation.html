@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<title>Geolocation Full API Test</title>
+	<link rel="stylesheet" href="../css/base.css" type="text/css" media="screen">
+</head>
+
+<body>
+
+
+<!-- This test page does not handle errors such as user declining the geoloc request. That should be on the todo list.-->
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!--                GEOLOCATION                     -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->	
+	
+	<div class="container">
+		<table class="table_view">
+			<tr>
+			    <td>
+				    Geolocation Full API Test
+				</td>
+			    <td class="col_check">
+			        <p id="geo_check"></p>
+			    </td>
+			    <td class="col_status">
+			        <p id="geo_status"></p>
+			    </td>
+			</tr>
+		</table>
+	</div>
+	<div class="containerMap" id="map_canvas"></div>
+	
+
+    <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script>
+      var map;
+
+      function initialize() {
+        var mapOptions = {
+          zoom: 6,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById('map_canvas'),
+            mapOptions);
+
+        // Try HTML5 geolocation
+        if(navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+          
+	          var geoCheck = document.getElementById("geo_check");
+	          var geoStatus = document.getElementById("geo_status");
+		if (position) { 
+			geoStatus.innerHTML += "PASS";
+			var coords = position.coords;
+			var time = position.timestamp;
+			geoCheck.innerHTML += "Current position:" + "<br />";
+			geoCheck.innerHTML += "Latitude: " + coords.latitude + "º <br />";
+			geoCheck.innerHTML += "Longitude: " + coords.longitude + "º <br />";
+			geoCheck.innerHTML += "Altitude: " + coords.altitude + "<br />";
+			geoCheck.innerHTML += "Accuracy: within " + coords.accuracy + " meters.<br />";
+			geoCheck.innerHTML += "Altitude Accuracy: within " + coords.altitudeAccuracy + " meters.<br />";
+			if (!coords.heading){
+				geoCheck.innerHTML += "Heading: Not moving. <br />";
+			}else{
+				geoCheck.innerHTML += "Heading: " + coords.heading + "<br />";
+			}
+			if(!coords.speed){
+				geoCheck.innerHTML += "Speed: Not moving. <br />";
+			}else{
+				geoCheck.innerHTML += "Speed: " + coords.speed + "<br />";		
+			}
+			geoCheck.innerHTML += "Timestamp: @" + time + "ms since boot. <br />";
+			
+			//code for google map
+			//var mapsurl = "http://maps.google.com/maps?f=q&source=s_q&hl=en&q=" + coords.latitude + ",+" + coords.longitude;
+			//geoCheck.innerHTML += "<iframe name=map src=" + mapsurl + " width=80% height=80%></iframe>"
+			
+			
+		}else{
+			geoStatus.innerHTML += "FAIL";
+			geoCheck.innerHTML += "Geolocation not supported.";
+		}	
+
+          
+          
+            var pos = new google.maps.LatLng(position.coords.latitude,
+                                             position.coords.longitude);
+
+            var infowindow = new google.maps.InfoWindow({
+              map: map,
+              position: pos,
+              content: 'Location found using Geolocation API (HTML5).'
+            });
+
+            map.setCenter(pos);
+          }, function() {
+            handleNoGeolocation(true);
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleNoGeolocation(false);
+        }
+      }
+
+      function handleNoGeolocation(errorFlag) {
+        if (errorFlag) {
+          var content = 'Error: The Geolocation service failed.';
+        } else {
+          var content = 'Error: Your browser doesn\'t support geolocation.';
+        }
+
+        var options = {
+          map: map,
+          position: new google.maps.LatLng(60, 105),
+          content: content
+        };
+
+        var infowindow = new google.maps.InfoWindow(options);
+        map.setCenter(options.position);
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+</body>
+</html>

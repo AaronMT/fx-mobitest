@@ -1,0 +1,18 @@
+{  
+      "version": "0.1",  
+      "name": "WebAPI Tests",  
+      "description": "Tests for various mozilla WebAPIs.",  
+ 
+      "developer": {  
+        "name": "Mozilla",  
+        "url": "http://mozillalabs.com"  
+      },  
+      "installs_allowed_from": ["*"],  
+            
+      "icons": {
+      		"16": "/img/online.png",
+      		"48": "/img/online.png",
+      		"128": "/img/online.png"
+      		}
+      
+}

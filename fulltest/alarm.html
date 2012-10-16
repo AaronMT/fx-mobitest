@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<title>Alarm Full API Test</title>
+	<link rel="stylesheet" href="../css/base.css" type="text/css" media="screen">
+</head>
+
+<body>
+
+<!-- This test page tests each function within battery API according to https://wiki.mozilla.org/WebAPI/AlarmAPI -->
+
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!--                    ALARM                       -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	<div class="container">
+		<table class="table_view">
+			<tr>
+			    <td>
+			        Alarm API
+			    </td>
+			    <td class="col_check">
+			        <p id="alarm_check"></p>
+			    </td>
+			    <td class="col_status">
+			        <p id="alarm_status"></p>
+			    </td>
+			</tr>
+		</table>
+	</div>
+	
+	<script>
+		var alarmStatus = document.getElementById("alarm_status");
+		var alarmCheck = document.getElementById("alarm_check");
+		var alarm = navigator.mozAlarms;
+		
+	    if (alarm){
+	        alarmStatus.innerHTML = "PASS";
+	        alarmCheck.innerHTML += navigator.mozHasPendingMessage("alarm");
+	    }else{
+		    alarmStatus.innerHTML = "FAIL";
+		    console.log("alarm error");
+	    }    
+	    
+	    //add ignoreTimezone alarm
+		var alarmId1;
+		var request = navigator.mozAlarms.add(new Date("May 13, 2012 17:07:00"), "ignoreTimezone", { mydata: "bar" });
+		request.onsuccess = function (e) { alarmId1 = e.target.result; };
+		request.onerror = function (e) { alert(e.target.error.name); };	    
+		
+		//add honorTimezone alarm
+		var alarmId2;
+		var request = navigator.mozAlarms.add(new Date("July 1, 2012 07:37:00"), "honorTimezone", { mydata: "foo" });
+		request.onsuccess = function (e) { alarmId2 = e.target.result; };
+		request.onerror = function (e) { alert(e.target.error.name); };
+	    
+	    //retrieve added alarm info
+		var request = navigator.mozAlarms.getAll();
+		request.onsuccess = function (e) { alert(JSON.stringify(e.target.result)); };
+		request.onerror = function (e) { alert(e.target.error.name); };	    
+		
+		//remove alarm
+		navigator.mozAlarms.remove(alarmId1);
+		navigator.mozAlarms.remove(alarmId2);
+		
+		//add listener for alarm
+		navigator.mozSetMessageHandler("alarm", function (message) { alert("alarm fired: " + JSON.stringify(message)); });
+		
+		//detect pending alarm messages
+		navigator.mozHasPendingMessage("alarm");	    
+	</script>
+	
+
+</body>
+</html>

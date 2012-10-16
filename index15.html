@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<title>Web API Tests</title>
+	<link rel="stylesheet" href="css/base.css" type="text/css" media="screen">
+</head>
+
+<!-- This is a webapp to test the WebSPI functions provided by mozilla firefox. -->
+
+<body>
+
+	<script src="js/start.js"></script>
+	<div id="page_title" class="container">
+		<table class="table_view">
+			<tr>
+				<td>
+					Web API List (15)
+				</td>
+				<td class="col_check">
+					Switch/Detail
+				</td>
+				<td class="col_status">
+					Status Result
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!--                    VIBRATION                   -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	<div class="container">
+		<table class="table_view">
+			<tr>
+			    <td>
+			        Vibration API
+			    </td>
+			    <td class="col_check">
+			        <button id="vibrate_on" class="test_button">Vibrate</button>
+			        <button id="vibrate_off" class="test_button">Stop</button>
+			    </td>
+			    <td class="col_status">
+			        <p id="vib_status"></p>
+			    </td>
+			</tr>
+		</table>
+	</div>
+	<script src="js/vibrate15.js"></script>
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!--                    BATTERY                     -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	<div class="container">
+		<table class="table_view">
+			<tr>
+				<td>
+					<a href="fulltest/batterystatus.html">Battery Status API</a>
+				</td>
+				<td class="col_check">
+					<p id="battery_check"></p>
+				</td>
+				<td class="col_status">
+					<p id="battery_status"></p>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<script src="js/battery15.js"></script>
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!--                FULL SCREEN                     -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	<div class="container">
+		<table class="table_view">
+			<tr>
+				<td>
+					Fullscreen API
+				</td>
+				<td class="col_check">
+					<button id="view-fullscreen">Fullscreen</button>
+					<button id="cancel-fullscreen">Exit FS</button>	
+					<p>Fullscreen Videos</p>
+					
+					<video id="mario-video" controls="controls">
+						<source src="http://www.archive.org/download/Mario1_507/Mario1_507_512kb.mp4">
+						<source src="http://www.archive.org/download/Mario1_507/Mario1_507.ogv">
+					</video>
+					
+					<button id="video-fullscreen">FS Video</button>
+				</td>
+				<td class="col_status">
+					<p id="fs_status"></p>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<script src="js/fullscreen.js"></script>
+	
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!--                  CAMERA                        -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	<div class="container">
+		<table class="table_view">
+			<tr>
+				<td>
+				Camera API
+				</td>
+				<td class="col_check">
+					<p>
+						<input type="file" id="take-picture" accept="image/*" width="20%">
+					</p>		
+					Preview:
+					<p>
+						<img src="about:blank" alt="" id="show-picture" width="30%">
+					</p>		
+					<p id="error"></p>
+				</td>
+				<td class="col_status">
+					<p id="camera_status"></p>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<script src="js/camera.js"></script>
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!--                  TWITTER                       -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->	
+	
+	<div class="container">
+		<table class="table_view">
+		<tr>
+			<td>
+				Twitter
+			</td>		
+			<td class="col_check">
+				<section class="main-content">
+				<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://kofway.github.com">Tweet</a>
+				</section>
+				<p class="footer"></p>
+			</td>
+			<td class="col_status">
+				<p id="social_status"></p>
+			</td>
+		</tr>
+		</table>
+	</div>	
+	<script src="js/twitter.js"></script>
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!--                SCREEN ORIENTATION              -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->	
+	
+	<div class="container">
+		<table class="table_view">
+			<tr>
+			    <td>
+			        Screen Orientation API
+			    </td>
+			    <td class="col_check">
+			    	Orientation: 
+			        <p id="ori_display"></p>
+			    </td>
+			    <td class="col_status">
+			        <p id="ori_status"></p>
+			    </td>
+			</tr>
+		</table>
+	</div>
+	<script src="js/orientation.js"></script>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!--                GEOLOCATION                     -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->	
+	
+	<div class="container">
+		<table class="table_view">
+			<tr>
+			    <td>
+				    <a href="fulltest/geolocation.html">Geolocation API</a>
+				</td>
+			    <td class="col_check">
+			        <p id="geo_check"></p>
+			    </td>
+			    <td class="col_status">
+			        <p id="geo_status"></p>
+			    </td>
+			</tr>
+		</table>
+	</div>
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script src="js/geolocation.js"></script>
+	
+</body>
+</html>
