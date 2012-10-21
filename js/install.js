@@ -1,7 +1,7 @@
 (function () {
     document.querySelector("#install_button").addEventListener("click", function () {
     	console.log("install click");
-		var request = navigator.mozApps.install("http://kofway.github.com/manifest.webapp");  
+		var request = navigator.mozApps.install("https://mobile.twitter.com/cache/twitter.webapp");  
 		var installStatus = document.getElementById("install_status");
 	    request.onsuccess = function() {  
 	    	console.log("install starting");

@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset=utf-8 />
-	<title>Web API Tests</title>
+	<meta charset=utf-8 name="viewport" content="width=480; initial-scale=.6667; user-scalable=0" />
+	<title>Firefox for Android - Web API Tests</title>
 	<link rel="stylesheet" href="css/base.css" type="text/css" media="screen">
+	<link rel="shortcut icon" href="img/fx.png" />
 </head>
 
-<!-- This is a webapp to test the WebSPI functions provided by mozilla firefox. -->
+<!-- This is a webapp to test the WebAPI functions provided by Mozilla Firefox for Android and B2G. -->
 
 <body>
-
+	<div class="header">
+		Firefox for Android - API Testing
+		<img src="img/fx.png" class="icon"/>
+	</div>
 	<script src="js/start.js"></script>
-	<div id="page_title" class="container">
+	<!--<div id="page_title" class="container">
 		<table class="table_view">
 			<tr>
 				<td>
-					Web API List (17)
+					Web API List
 				</td>
 				<td class="col_check">
 					Switch/Detail
@@ -25,7 +29,7 @@
 				</td>
 			</tr>
 		</table>
-	</div>
+	</div>-->
     
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- 					INSTALL 					-->
@@ -49,9 +53,30 @@
 	<script src="js/install.js"></script>
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- 					NOTIFICATIONS 					-->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->	
+	<div class="container">
+		<table class="table_view">
+			<tr>
+			    <td>
+			        Notifications API
+			    </td>
+			    <td class="col_check">
+			        <button id="notification_button" class="test_button">Test</button>
+			    </td>
+			    <td class="col_status">
+			        <p id="notification_status"></p>
+			    </td>
+			</tr>
+		</table>
+	</div>
+	<script src="js/notification.js"></script>
+
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- 					CONNECTION 					-->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-  <!--
+  
 	<div id="connection" class="container">
 		<table class="table_view">
 			<tr>
@@ -59,11 +84,10 @@
 					Connection API
 				</td>
 				<td class="col_check">
-			    	<button id="connection_button">Check</button>
 				</td>
 				<td class="col_status">
 					<section class="main-content">
-				    	<span></span>
+			    	<span id="status"></span>
 					</section>
 				</td>
 			</tr>
@@ -90,12 +114,19 @@
 	</style>
 	
 	<script>
-	function updateOnlineStatus(online) {
+	var statusElem = document.getElementById('status')
+
+	setInterval(function () {
+  	statusElem.className = navigator.onLine ? 'online' : 'offline';
+  	statusElem.innerHTML = navigator.onLine ? 'Online' : 'Offline';  
+  }, 250);	
+
+  function updateOnlineStatus(online) {
 	  if (online) {
 	    $("#connection span").className = "online";
 	    $("#connection span").textContent = "Online";
 	    $("#mapbutton").style.visibility = "visible";
-	    } else {
+	  } else {
 	    $("#connection span").className = "offline";
 	    $("#connection span").textContent = "Offline";
 	    $("#mapbutton").style.visibility = "hidden";
@@ -105,7 +136,7 @@
 	document.body.addEventListener("online", function () { updateOnlineStatus(true) }, false);
 	updateOnlineStatus(navigator.onLine);
 	</script>
--->
+
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!--                    VIBRATION                   -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -220,7 +251,7 @@
 			</td>		
 			<td class="col_check">
 				<section class="main-content">
-				<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://kofway.github.com">Tweet</a>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://aaronmt.github.com">Tweet</a>
 				</section>
 				<p class="footer"></p>
 			</td>
@@ -303,7 +334,7 @@
 	<!--                IDLE                            -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->	
 
-	<!--
+	
 	<div class="container">
 		<table class="table_view">
 			<tr>
@@ -320,7 +351,7 @@
 		</table>
 	</div>
 	<script src="js/idle.js"></script>
-	-->
+	
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!--                DEVICE STORAGE                  -->

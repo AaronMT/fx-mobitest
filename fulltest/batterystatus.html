@@ -43,9 +43,9 @@
 	            console.log("Set status");
 	            batteryStatus.innerHTML = "PASS";
 	            batteryCheck.innerHTML += "Charging? " + battery.charging + "<br />";
-	            batteryCheck.innerHTML += "Charing time: " + battery.chargingTime + "<br />";
+	            batteryCheck.innerHTML += "Charging time: " + battery.chargingTime + "<br />";
 	            batteryCheck.innerHTML += "Discharge time: " + battery.discharingTime + "<br />";
-	            batteryCheck.innerHTML += "Battery level: " + (battery.level)*100 + "%<br />";
+	            batteryCheck.innerHTML += "Battery %: " + (battery.level)*100 + "%<br />";
 	        }
 	        // Set initial status
 	        setStatus();
